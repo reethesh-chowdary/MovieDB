@@ -1,0 +1,78 @@
+.edit-movie-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  gap: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.edit-movie-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  color: #333;
+}
+
+.edit-movie-form input,
+.edit-movie-form textarea {
+  padding: 0.6rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 0.4rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.edit-movie-form input:focus,
+.edit-movie-form textarea:focus {
+  border-color: #007bff;
+}
+
+.submit-button {
+  padding: 0.75rem 1.5rem;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.submit-button:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .edit-movie-form {
+    max-width: 95vw;
+    padding: 1.2rem;
+    gap: 1rem;
+  }
+
+  .edit-movie-form label {
+    font-size: 0.95rem;
+  }
+
+  .edit-movie-form input,
+  .edit-movie-form textarea {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.7rem;
+  }
+
+  .submit-button {
+    font-size: 0.95rem;
+    padding: 0.65rem 1.2rem;
+    width: 100%;
+    text-align: center;
+  }
+}

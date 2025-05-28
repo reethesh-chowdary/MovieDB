@@ -1,0 +1,111 @@
+
+.movie-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 2rem auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  align-items: flex-start;
+  
+}
+
+.movie-details img.movie-image {
+  width: 260px;
+  height: 340px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.movie-details > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.movie-description,
+.movie-rating,
+.movie-release,
+.movie-genre {
+  font-size: 1.05rem;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 0.7rem;
+}
+
+.edit-button,
+.delete-button {
+  padding: 0.6rem 1.4rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.edit-button {
+  background: #007bff;
+  color: #fff;
+}
+
+.edit-button:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+.delete-button {
+  background: #dc3545;
+  color: #fff;
+}
+
+.delete-button:hover {
+  background: #a71d2a;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 800px) {
+  .movie-details {
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    gap: 2rem;
+  }
+
+  .movie-details img.movie-image {
+    width: 90vw;
+    max-width: 320px;
+    height: auto;
+  }
+
+  .movie-title {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .movie-details > div {
+    align-items: center;
+    text-align: center;
+  }
+
+  .edit-button,
+  .delete-button {
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0.5rem 0;
+    width: 130px;
+  }
+}
