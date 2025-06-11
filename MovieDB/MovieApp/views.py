@@ -4,6 +4,52 @@ from rest_framework.response import Response
 from django.http import HttpResponse
 from .models import User,Movie
 from django.utils import timezone
+from django.urls import path
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import status
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import check_password
+
+@api_view(['POST'])
+def signup(request):
+    data = request.data
+    username = data.get('username')
+    password = data.get('password')
+
+    if not username or not password:
+        return Response({'error': 'Username and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    if User.objects.filter(username=username).exists():
+        return Response({'error': 'Username already exists.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    user = User.objects.create(
+        username=username,
+        password=make_password(password)  # Hash the password!
+    )
+    return Response({'message': 'User created successfully.'}, status=status.HTTP_201_CREATED)
+
+
+@api_view(['POST'])
+def signin(request):
+    data = request.data
+    username = data.get('username')
+    password = data.get('password')
+
+    if not username or not password:
+        return Response({'error': 'Username and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return Response({'error': 'Invalid username or password.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    if not check_password(password, user.password):
+        return Response({'error': 'Invalid username or password.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    return Response({'message': 'Signin successful.', 'user_id': user.id})
+
 
 @api_view(['GET','POST'])
 def movies(request):
@@ -79,3 +125,9 @@ def movie_detail(request, id):
     elif request.method == 'DELETE':
         movie.delete()
         return Response({'message': 'Movie deleted successfully'})
+
+class ProtectedView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response({'message': 'This is a protected view'})

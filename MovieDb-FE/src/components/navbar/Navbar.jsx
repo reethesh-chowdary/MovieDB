@@ -10,7 +10,15 @@ function Navbar() {
           <ul>
             <li onClick={()=>navigate('/')}>Home</li>
             <li onClick={() => navigate('/add-movie')}>Add Movie</li>
-            <li>Login</li>
+            {localStorage.getItem('status') === 'true' ? (
+              <li onClick={() => {
+                localStorage.removeItem('status');
+                navigate('/');
+              }}>Logout</li>
+            ) : (
+             <li onClick={() => navigate('/signin')}>Login</li>
+            )}
+            
           </ul>
         </nav>
     </div>

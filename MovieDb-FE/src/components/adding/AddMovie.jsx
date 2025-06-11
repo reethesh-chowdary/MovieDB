@@ -1,10 +1,16 @@
 import React from 'react'
 import './AddMovie.css';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 function AddMovie() {
     const navigate = useNavigate();
+    useEffect(() => {
+        if (localStorage.getItem('status') !== 'true') {
+        alert("You need to be logged in to add a movie.");
+        navigate('/signin');
+    }
+    }, [navigate]);
     const [movie, setMovie] = useState({
         title: '',
         rating: '',
