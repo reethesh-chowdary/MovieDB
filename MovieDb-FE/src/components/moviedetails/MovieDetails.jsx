@@ -6,6 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 function MovieDetails() {
     const navigate = useNavigate();
+    useEffect(() => {
+        if (localStorage.getItem('status') !== 'true') {
+            navigate('/signin');
+        }
+    }, [navigate]);
     const [movie, setMovie] = useState(null);
     const { id } = useParams();
     async function fetchMovieDetails() {
@@ -19,22 +24,22 @@ function MovieDetails() {
     useEffect(() => {
         fetchMovieDetails();
     }, [])
-   async function onDelete() {
-    try {
-        const id = movie.id || movie._id; // use correct key based on your backend
-        const response = await axios.delete(`http://127.0.0.1:8000/movies/${id}/`);
-        
-        if (response.status === 200) {
-            alert("Movie deleted successfully!");
-            navigate('/');
-        } else {
-            alert("Failed to delete the movie.");
+    async function onDelete() {
+        try {
+            const id = movie.id || movie._id; // use correct key based on your backend
+            const response = await axios.delete(`http://127.0.0.1:8000/movies/${id}/`);
+
+            if (response.status === 200) {
+                alert("Movie deleted successfully!");
+                navigate('/');
+            } else {
+                alert("Failed to delete the movie.");
+            }
+        } catch (error) {
+            console.error("Delete Error:", error);
+            alert("⚠️ An error occurred while deleting the movie.");
         }
-    } catch (error) {
-        console.error("Delete Error:", error);
-        alert("⚠️ An error occurred while deleting the movie.");
     }
-}
     async function onEdit() {
         const id = movie.id || movie._id; // use correct key based on your backend
         navigate(`/edit-movie/${id}`);

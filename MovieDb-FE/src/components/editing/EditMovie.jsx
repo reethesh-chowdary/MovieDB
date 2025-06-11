@@ -5,6 +5,11 @@ import axios from 'axios';
 
 function EditMovie() {
     const navigate = useNavigate();
+    useEffect(() => {
+        if (localStorage.getItem('status') !== 'true') {
+            navigate('/signin');
+        }
+    },[navigate]);
     const [movie, setMovie] = useState({
         title: '',
         description: '',

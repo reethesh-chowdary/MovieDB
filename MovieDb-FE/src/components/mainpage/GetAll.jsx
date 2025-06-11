@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Card from '../CardMaker/Card'
 function GetAll() {
-  
+    
     const [movieData,setMovieData] = useState([]);
     async function preview() {
             const response = await axios.get('http://127.0.0.1:8000/movies/');
